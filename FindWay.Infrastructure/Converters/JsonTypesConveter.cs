@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace CUI
+namespace FindWay.Infrastructure.Converters
 {
     public class JsonTypesConveter : JsonConverter
     {
@@ -16,12 +13,12 @@ namespace CUI
             _convertingTypes.Add(convertFrom, convertTo);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
         {
             serializer.Serialize(writer, value);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
             return serializer.Deserialize(reader, _convertingTypes[objectType]);
         }

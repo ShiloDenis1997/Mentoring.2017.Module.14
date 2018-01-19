@@ -7,16 +7,16 @@ namespace FindWay.Infrastructure.Services
 {
     public class WaysService : IWaysService
     {
-        private readonly IWayFinderStrategy _wayFinder;
-
-        public WaysService(IWayFinderStrategy wayFinder)
+        public WaysService(IWayFinderStrategy wayFinderStrategy)
         {
-            _wayFinder = wayFinder;
+            WayFinderStrategy = wayFinderStrategy;
         }
+
+        public IWayFinderStrategy WayFinderStrategy { get; set; }
 
         public List<IRoute> FindWay(IGraph graph, INode startNode, INode endNode)
         {
-            return _wayFinder.FindWay(graph, startNode, endNode);
+            return WayFinderStrategy.FindWay(graph, startNode, endNode);
         }
 
         public List<IRoute> FindWay(IGraph graph, params INode[] nodes)
@@ -24,7 +24,7 @@ namespace FindWay.Infrastructure.Services
             var result = new List<IRoute>();
             for (int i = 1; i < nodes.Length; i++)
             {
-                result.AddRange(_wayFinder.FindWay(graph, nodes[i - 1], nodes[i]));
+                result.AddRange(WayFinderStrategy.FindWay(graph, nodes[i - 1], nodes[i]));
             }
 
             return result;

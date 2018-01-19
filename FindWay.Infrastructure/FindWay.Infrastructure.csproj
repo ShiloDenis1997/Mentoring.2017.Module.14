@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
     </Reference>
@@ -52,12 +55,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\JsonTypesConveter.cs" />
     <Compile Include="Models\Graph.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Abstract\ISerializationService.cs" />
+    <Compile Include="Services\SerializationService.cs" />
     <Compile Include="Strategies\Abstract\BaseQuickGraphWayFinder.cs" />
+    <Compile Include="Strategies\Abstract\ISerializationStrategy.cs" />
     <Compile Include="Strategies\CheapestWayFinder.cs" />
+    <Compile Include="Strategies\JsonSerializationStrategy.cs" />
     <Compile Include="Strategies\ShortestWayFinder.cs" />
     <Compile Include="Services\WaysService.cs" />
     <Compile Include="Models\WeightedEdge.cs" />

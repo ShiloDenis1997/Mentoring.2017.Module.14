@@ -7,29 +7,14 @@ namespace FindWay.Infrastructure.Models
 {
     public class Graph : IGraph
     {
-        private List<INode> _nodes;
-
-        public Graph()
-        {
-            _nodes = new List<INode>();
-        }
+        public Graph() :this(new List<INode>())
+        {}
 
         public Graph(List<INode> nodes)
         {
-            _nodes = nodes;
+            Nodes = nodes;
         }
 
-        public IEnumerator<INode> GetEnumerator()
-        {
-            foreach (var node in _nodes)
-            {
-                yield return node;
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        public ICollection<INode> Nodes { get; set; }
     }
 }

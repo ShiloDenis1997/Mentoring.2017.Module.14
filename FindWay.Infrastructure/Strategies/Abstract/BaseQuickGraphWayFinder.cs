@@ -13,9 +13,9 @@ namespace FindWay.Infrastructure.Strategies.Abstract
         public List<IRoute> FindWay(IGraph graph, INode startNode, INode endNode)
         {
             AdjacencyGraph<INode, WeightedEdge> quickGraph = new AdjacencyGraph<INode, WeightedEdge>();
-            quickGraph.AddVertexRange(graph);
+            quickGraph.AddVertexRange(graph.Nodes);
             Func<IRoute, int> weightFunc = WeightFunc;
-            quickGraph.AddEdgeRange(graph.SelectMany(n => n.Routes).Select(r => new WeightedEdge(r, weightFunc)));
+            quickGraph.AddEdgeRange(graph.Nodes.SelectMany(n => n.Routes).Select(r => new WeightedEdge(r, weightFunc)));
 
             var solution = FindOptimalWay(quickGraph, startNode);
             solution(endNode, out var result);

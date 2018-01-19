@@ -2,8 +2,8 @@
 
 namespace FindWay.Interfaces.Models
 {
-    public interface IGraph : IEnumerable<INode>
+    public interface IGraph
     {
-
+        ICollection<INode> Nodes { get; set; }
     }
 }
