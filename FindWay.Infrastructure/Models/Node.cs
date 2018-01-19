@@ -10,6 +10,7 @@ namespace FindWay.Infrastructure.Models
             Routes = new List<IRoute>();
         }
 
+        public string City { get; set; }
         public ICollection<IRoute> Routes { get; set; }
     }
 }

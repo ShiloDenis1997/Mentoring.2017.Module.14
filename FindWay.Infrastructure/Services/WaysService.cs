@@ -18,5 +18,16 @@ namespace FindWay.Infrastructure.Services
         {
             return _wayFinder.FindWay(graph, startNode, endNode);
         }
+
+        public List<IRoute> FindWay(IGraph graph, params INode[] nodes)
+        {
+            var result = new List<IRoute>();
+            for (int i = 1; i < nodes.Length; i++)
+            {
+                result.AddRange(_wayFinder.FindWay(graph, nodes[i - 1], nodes[i]));
+            }
+
+            return result;
+        }
     }
 }

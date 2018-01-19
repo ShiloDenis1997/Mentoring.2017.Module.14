@@ -6,5 +6,6 @@ namespace FindWay.Interfaces.Services
     public interface IWaysService
     {
         List<IRoute> FindWay(IGraph graph, INode startNode, INode endNode);
+        List<IRoute> FindWay(IGraph graph, params INode[] nodes);
     }
 }

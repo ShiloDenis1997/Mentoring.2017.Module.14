@@ -31,34 +31,5 @@ namespace FindWay.Infrastructure.Models
         {
             return GetEnumerator();
         }
-
-        public void Add(INode item)
-        {
-            _nodes.Add(item);
-        }
-
-        public void Clear()
-        {
-            _nodes.Clear();
-        }
-
-        public bool Contains(INode item)
-        {
-            return _nodes.Contains(item);
-        }
-
-        public void CopyTo(INode[] array, int arrayIndex)
-        {
-            _nodes.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(INode item)
-        {
-            return _nodes.Remove(item);
-        }
-
-        public int Count => _nodes.Count;
-
-        bool ICollection<INode>.IsReadOnly => false;
     }
 }

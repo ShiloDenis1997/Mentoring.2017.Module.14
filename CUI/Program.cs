@@ -1,19 +1,11 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FindWay.Infrastructure.Models;
 using FindWay.Infrastructure.Services;
 using FindWay.Infrastructure.Strategies;
 using FindWay.Interfaces.Models;
 using FindWay.Interfaces.Services;
 using FindWay.Interfaces.Strategies;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace CUI
 {
@@ -27,63 +19,53 @@ namespace CUI
             //{
             //    graph = factory.Create(fileStream);
             //}
-            INode first = new Node();
-            INode second = new Node();
-            INode third = new Node();
-            first.Routes.Add(new Route
-            {
-                FromNode = first,
-                ToNode = third,
-                Duration = 5,
-                Cost = 10
-            });
-            first.Routes.Add(new Route
-            {
-                FromNode = first,
-                ToNode = second,
-                Duration = 1,
-                Cost = 100
-            });
-            second.Routes.Add(new Route
-            {
-                FromNode = second,
-                ToNode = third,
-                Duration = 3,
-                Cost = 30
-            });
+            //INode first = new Node();
+            //INode second = new Node();
+            //INode third = new Node();
+            //first.Routes.Add(new Route
+            //{
+            //    FromNode = first,
+            //    ToNode = third,
+            //    Duration = 5,
+            //    Cost = 10
+            //});
+            //first.Routes.Add(new Route
+            //{
+            //    FromNode = first,
+            //    ToNode = second,
+            //    Duration = 1,
+            //    Cost = 100
+            //});
+            //second.Routes.Add(new Route
+            //{
+            //    FromNode = second,
+            //    ToNode = third,
+            //    Duration = 3,
+            //    Cost = 30
+            //});
 
-            IGraph graph = new Graph(new List<INode> { first, second, third });
-            var copy = graph;
-            var binder = new DefaultSerializationBinder();
-            var jsonConverter = new JsonTypesConveter();
-            jsonConverter.AddTypeMatching(typeof(INode), typeof(Node));
-            jsonConverter.AddTypeMatching(typeof(IRoute), typeof(Route));
-            jsonConverter.AddTypeMatching(typeof(IGraph), typeof(Graph));
-            
-            JsonSerializer serializer = new JsonSerializer
-            {
-                Formatting = Formatting.Indented,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                Converters = { jsonConverter }
-            };
+            //IGraph graph = new Graph(new List<INode> { first, second, third });
 
-            using (var writer = new StreamWriter("output.json"))
+
+            IGraph graph;
+            IGraphSerializer loader = new JsonGraphSerializer();
+            using (var fileStream = new FileStream("input.json", FileMode.Open))
             {
-                serializer.Serialize(writer, graph, typeof(IGraph));
+                graph = loader.Load(fileStream);
             }
-            using (var reader = new StreamReader("output.json"))
+            using (var fileStream = new FileStream("output.json", FileMode.OpenOrCreate))
             {
-                graph = serializer.Deserialize<IGraph>(new JsonTextReader(reader));
-            }
-            using (var writer = new StreamWriter("output1.json"))
-            {
-                serializer.Serialize(writer, graph, typeof(IGraph));
+                loader.Save(fileStream, graph);
             }
             IWayFinderStrategy wayFinder = new CheapestWayFinder();
             IWaysService waysService = new WaysService(wayFinder);
             var way = waysService.FindWay(graph, graph.First(), graph.Last());
             Console.WriteLine($"Total way cost: {way.Sum(r => r.Cost)}");
+            Console.WriteLine($"Total way duration: {way.Sum(r => r.Duration)}");
+
+            way = waysService.FindWay(graph, graph.Take(1).First(), graph.Skip(1).Take(1).First(), graph.Last());
+            Console.WriteLine($"Total way cost: {way.Sum(r => r.Cost)}");
+            Console.WriteLine($"Total way duration: {way.Sum(r => r.Duration)}");
         }
     }
 }

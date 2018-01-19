@@ -1,0 +1,52 @@
+﻿[
+  {
+    "$id": "node1",
+    "City": "Minsk",
+    "Routes": [
+      {
+        "$id": "2",
+        "FromNode": {
+          "$ref": "node1"
+        },
+        "ToNode": {
+          "$id": "node3",
+          "City": "Brest",
+          "Routes": []
+        },
+        "Cost": 10,
+        "Duration": 5
+      },
+      {
+        "$id": "4",
+        "FromNode": {
+          "$ref": "node1"
+        },
+        "ToNode": {
+          "$id": "node2",
+          "City": "Moscow",
+          "Routes": [
+            {
+              "$id": "6",
+              "FromNode": {
+                "$ref": "node2"
+              },
+              "ToNode": {
+                "$ref": "node3"
+              },
+              "Cost": 30,
+              "Duration": 3
+            }
+          ]
+        },
+        "Cost": 100,
+        "Duration": 1
+      }
+    ]
+  },
+  {
+    "$ref": "node2"
+  },
+  {
+    "$ref": "node3"
+  }
+]
