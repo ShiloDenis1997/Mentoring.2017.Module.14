@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using FindWay.Interfaces.Models;
 using FindWay.Interfaces.Services;
+using FindWay.Interfaces.Strategies;
 
 namespace FindWay.Infrastructure.Services
 {
     public class WaysService : IWaysService
     {
-        private readonly IWayFinder _wayFinder;
+        private readonly IWayFinderStrategy _wayFinder;
 
-        public WaysService(IWayFinder wayFinder)
+        public WaysService(IWayFinderStrategy wayFinder)
         {
             _wayFinder = wayFinder;
         }

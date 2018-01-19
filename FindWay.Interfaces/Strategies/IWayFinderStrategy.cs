@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using FindWay.Interfaces.Models;
 
-namespace FindWay.Interfaces.Services
+namespace FindWay.Interfaces.Strategies
 {
-    public interface IWayFinder
+    public interface IWayFinderStrategy
     {
         List<IRoute> FindWay(IGraph graph, INode startNode, INode endNode);
     }

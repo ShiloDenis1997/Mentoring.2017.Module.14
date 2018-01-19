@@ -5,6 +5,11 @@ namespace FindWay.Infrastructure.Models
 {
     public class Node : INode
     {
+        public Node()
+        {
+            Routes = new List<IRoute>();
+        }
+
         public ICollection<IRoute> Routes { get; set; }
     }
 }

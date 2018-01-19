@@ -44,7 +44,7 @@
     <Compile Include="Models\INode.cs" />
     <Compile Include="Models\IRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IWayFinder.cs" />
+    <Compile Include="Strategies\IWayFinderStrategy.cs" />
     <Compile Include="Services\IWaysService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
