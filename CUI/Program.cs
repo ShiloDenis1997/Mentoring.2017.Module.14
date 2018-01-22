@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FindWay.Infrastructure.Converters;
@@ -7,10 +6,8 @@ using FindWay.Infrastructure.Models;
 using FindWay.Infrastructure.Services;
 using FindWay.Infrastructure.Services.Abstract;
 using FindWay.Infrastructure.Strategies;
-using FindWay.Infrastructure.Strategies.Abstract;
 using FindWay.Interfaces.Models;
 using FindWay.Interfaces.Services;
-using FindWay.Interfaces.Strategies;
 using Newtonsoft.Json;
 
 namespace CUI
@@ -22,38 +19,6 @@ namespace CUI
 
         static void Main(string[] args)
         {
-            //IFactory factory = new JsonFactory();
-            //IGraph graph;
-            //using (var fileStream = new FileStream(args[0], FileMode.Open))
-            //{
-            //    graph = factory.Create(fileStream);
-            //}
-            //INode first = new Node();
-            //INode second = new Node();
-            //INode third = new Node();
-            //first.Routes.Add(new Route
-            //{
-            //    FromNode = first,
-            //    ToNode = third,
-            //    Duration = 5,
-            //    Cost = 10
-            //});
-            //first.Routes.Add(new Route
-            //{
-            //    FromNode = first,
-            //    ToNode = second,
-            //    Duration = 1,
-            //    Cost = 100
-            //});
-            //second.Routes.Add(new Route
-            //{
-            //    FromNode = second,
-            //    ToNode = third,
-            //    Duration = 3,
-            //    Cost = 30
-            //});
-
-            //IGraph graph = new Graph(new List<INode> { first, second, third });
             ConfigureApp();
 
             IGraph graph;
